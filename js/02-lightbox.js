@@ -16,17 +16,15 @@ function createGalleryItem(galleryItems) {
         <img
         class="gallery__image"
         src="${preview}"
-        title="${description}"
+        alt="${description}"
         />
         </a>
     `;
     }).join('');
 }
 
-const lightBox = new SimpleLightbox('.gallery a', {
-    docClose: false,
-    captionsData: "title",
-    captionPosition: 'bottom',
-    captionDelay: 250,
+const lightBox = new SimpleLightbox(".gallery a", {
+    captionsData: "alt",
+    captionDelay: "250ms",
 });
-// console.log(galleryItems);
+console.log(galleryItems);
