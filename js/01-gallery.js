@@ -37,4 +37,6 @@ const newGallery = () => {
 };
 newGallery();
 pics.addEventListener("click", handleClick);
+
+pics.addEventListener("click", galleryClick);
 // console.log(galleryItems);
