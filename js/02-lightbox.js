@@ -6,8 +6,6 @@ const galleryMarkup = createGalleryItem(galleryItems);
 
 galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
-// galleryContainer.addEventListener('click', galleryClick);
-
 
 
 function createGalleryItem(galleryItems) {
@@ -18,8 +16,7 @@ function createGalleryItem(galleryItems) {
         <img
         class="gallery__image"
         src="${preview}"
-        data-source="${original}"
-        alt="${description}"
+        title="${description}"
         />
         </a>
     `;
@@ -28,8 +25,8 @@ function createGalleryItem(galleryItems) {
 
 const lightBox = new SimpleLightbox('.gallery a', {
     docClose: false,
-    captionsData: "alt",
+    captionsData: "title",
     captionPosition: 'bottom',
     captionDelay: 250,
 });
-console.log(galleryItems);
+// console.log(galleryItems);
