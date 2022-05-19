@@ -44,7 +44,7 @@ function onImageItemClick(item) {
                 document.addEventListener('keydown', listener)
             },
         }
-    );
+    )
     instance.show()
 };
 
