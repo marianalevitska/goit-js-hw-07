@@ -8,7 +8,6 @@ galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
 galleryContainer.addEventListener('click', onImageItemClick);
 galleryContainer.addEventListener('click', galleryClick);
-let modalWindow;
 
 function createGalleryItem(galleryItems) {
 
