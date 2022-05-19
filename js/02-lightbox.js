@@ -6,8 +6,9 @@ const galleryMarkup = createGalleryItem(galleryItems);
 
 galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
 
-galleryContainer.addEventListener('click', onImageItemClick);
-galleryContainer.addEventListener('click', galleryClick);
+// galleryContainer.addEventListener('click', galleryClick);
+
+
 
 function createGalleryItem(galleryItems) {
 
@@ -23,49 +24,12 @@ function createGalleryItem(galleryItems) {
         </a>
     `;
     }).join('');
-};
-let gallery = new SimpleLightbox(`
-    <img
-    src ="${e.target.dataset.source}">`);
-gallery.on('show.simplelightbox', function (e) {
-    if (e.target.nodeName !== "IMG") {
-        return
-    }
-    e.preventDefault();
+}
 
-    onShow: () => {
-        const listener = function (evt) {
-            if (evt.key === "Escape") {
-                document.removeEventListener('keydown', listener)
-            }
-            return lightbox.close();
-        };
-        document.addEventListener('keydown', listener);
-    };
-    lightbox.show();
+const lightBox = new SimpleLightbox('.gallery a', {
+    docClose: false,
+    captionsData: "alt",
+    captionPosition: 'bottom',
+    captionDelay: 250,
 });
-// function onImageItemClick(e) {
-//     if (e.target.nodeName !== "IMG") {
-//         return
-//     }
-//     e.preventDefault();
-//     const lageImage = e.target.dataset.source;
-//     var lightbox = new SimpleLightbox(`
-//     <img
-//     src ="${e.target.dataset.source}">`,
-
-//         {
-//             onShow: () => {
-//                 const listener = function (evt) {
-//                     if (evt.key === "Escape") {
-//                         document.removeEventListener('keydown', listener)
-//                     }
-//                     return lightbox.close();
-//                 };
-//                 document.addEventListener('keydown', listener)
-//             },
-//         }
-//     )
-//     lightbox.show()
-// };
 console.log(galleryItems);
