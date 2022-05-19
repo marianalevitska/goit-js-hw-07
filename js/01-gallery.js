@@ -24,22 +24,22 @@ function createGalleryItem(galleryItems) {
     </div> `;
     }).join('');
 }
-function onImageItemClick(item) {
+function onImageItemClick() {
     if (item.target.nodeName !== "IMG") {
         return
     }
-    item.preventDefault(item);
+    item.preventDefault();
     const lageImage = evt.target.dataset.source;
     const instance = basicLightbox.create(`
     <img
-    src ="${lageImage}">`,
+    src ="${evt.target.dataset.source}">`,
         {
             onShow: (instance) => {
                 const listener = function (evt) {
                     if (evt.key === "Escape") {
                         document.removeEventListener('keydown', listener)
                     }
-                    return instance.close()
+                    return instance.close();
                 };
                 document.addEventListener('keydown', listener)
             },
