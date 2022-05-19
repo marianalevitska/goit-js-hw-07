@@ -13,8 +13,7 @@ function createGalleryItem(galleryItems) {
 
     return galleryItems.map(({ preview, original, description }) => {
         return `
-    <div class="gallery__item">
-        <a class="gallery__link" href="${original}">
+        <a class="gallery__item" href="${original}">
         <img
         class="gallery__image"
         src="${preview}"
@@ -22,7 +21,7 @@ function createGalleryItem(galleryItems) {
         alt="${description}"
         />
         </a>
-    </div> `;
+    `;
     }).join('');
 }
 console.log(galleryItems);
