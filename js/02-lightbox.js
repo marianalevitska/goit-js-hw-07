@@ -24,28 +24,48 @@ function createGalleryItem(galleryItems) {
     `;
     }).join('');
 };
-function onImageItemClick(e) {
+let gallery = new SimpleLightbox(`
+    <img
+    src ="${e.target.dataset.source}">`);
+gallery.on('show.simplelightbox', function (e) {
     if (e.target.nodeName !== "IMG") {
         return
     }
     e.preventDefault();
-    const lageImage = e.target.dataset.source;
-    var lightbox = new SimpleLightbox(`
-    <img
-    src ="${e.target.dataset.source}">`,
 
-        {
-            onShow: () => {
-                const listener = function (evt) {
-                    if (evt.key === "Escape") {
-                        document.removeEventListener('keydown', listener)
-                    }
-                    return lightbox.close();
-                };
-                document.addEventListener('keydown', listener)
-            },
-        }
-    )
-    lightbox.show()
-};
+    onShow: () => {
+        const listener = function (evt) {
+            if (evt.key === "Escape") {
+                document.removeEventListener('keydown', listener)
+            }
+            return lightbox.close();
+        };
+        document.addEventListener('keydown', listener);
+    };
+    lightbox.show();
+});
+// function onImageItemClick(e) {
+//     if (e.target.nodeName !== "IMG") {
+//         return
+//     }
+//     e.preventDefault();
+//     const lageImage = e.target.dataset.source;
+//     var lightbox = new SimpleLightbox(`
+//     <img
+//     src ="${e.target.dataset.source}">`,
+
+//         {
+//             onShow: () => {
+//                 const listener = function (evt) {
+//                     if (evt.key === "Escape") {
+//                         document.removeEventListener('keydown', listener)
+//                     }
+//                     return lightbox.close();
+//                 };
+//                 document.addEventListener('keydown', listener)
+//             },
+//         }
+//     )
+//     lightbox.show()
+// };
 console.log(galleryItems);
