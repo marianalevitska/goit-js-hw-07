@@ -1,42 +1,95 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-const pics = document.querySelector(".gallery");
-let modalWindow;
+const galleryContainer = document.querySelector('.gallery');
 
-const galleryClick = (evt) => {
-    evt.preventDefault();
+const galleryMarkup = createGalleryItem(galleryItems);
 
-    const scrImg = evt.target.getAttribute("data-source");
-    if (scrImg) {
-        modalWindow.basicLightbox.create(`<img id="preview" scr="${scrimg}">`, {
-            onShow: () => pics.addEventListener("keydown", handleToggler),
-            onClose: () => pics.addEventListener("keydown", handleToggler),
-        });
-        modalWindow.show();
-    }
-};
-const handleToggler = (evt) => {
-    if (evt.key === "Escape") modalWindow.close();
-};
-const newGallery = () => {
-    const imgHTML = galleryItems.map(
-        ({ original, preview, description }) => `
-        <li class="gallery_item">
-        <a class="gallery_link" href="${original}">
+galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
+
+galleryContainer.addEventListener('click', onImageItemClick);
+
+function createGalleryItem(galleryItems) {
+
+    return galleryItems.map(({ preview, original, description }) => {
+        return `
+    <div class="gallery__item">
+        <a class="gallery__link" href="${original}">
         <img
-        class="gallery_img"
-        scr="${preview}"
-        alt="${description}"
+        class="gallery__image"
+        src="${preview}"
         data-source="${original}"
-        >
+        alt="${description}"
+        />
         </a>
-        </li>`
-    )
-        .join("");
-    pics.innerHTML = imgHTML;
+    </div> `;
+    }).join('');
+}
+function onImageItemClick(item) {
+    if (item.target.nodeName !== "IMG") {
+        return
+    }
+    item.preventDefault(item);
+    const lageImage = evt.target.dataset.source;
+    const instance = basicLightbox.create(`
+    <img
+    src ="${lageImage}">`,
+        {
+            onShow: (instance) => {
+                const listener = function (evt) {
+                    if (evt.key === "Escape") {
+                        document.removeEventListener('keydown', listener)
+                    }
+                    return instance.close()
+                };
+                document.addEventListener('keydown', listener)
+            },
+        }
+    );
+    instance.show()
 };
-newGallery();
-pics.addEventListener("click", handleClick);
 
-pics.addEventListener("click", galleryClick);
-// console.log(galleryItems);
+
+
+
+// const pics = document.querySelector(".gallery");
+// let modalWindow;
+
+// const galleryClick = (evt) => {
+//     evt.preventDefault();
+
+//     const scrImg = evt.target.getAttribute("data-source");
+//     if (scrImg) {
+//         modalWindow.basicLightbox.create(`<img id="preview" scr="${scrImg}">`, {
+//             onShow: () => pics.addEventListener('keydown', handleToggler),
+//             onClose: () => pics.addEventListener('keydown', handleToggler),
+//         });
+//         modalWindow.show();
+//     }
+// };
+// const handleToggler = (evt) => {
+//     if (evt.key === 'Escape') {
+//         modalWindow.close()
+//     };
+// };
+// const newGallery = () => {
+//     const imgHTML = galleryItems.map(
+//         ({ original, preview, description }) => `
+//         <li class="gallery_item">
+//         <a class="gallery_link" href="${original}">
+//         <img
+//         class="gallery_img"
+//         scr="${preview}"
+//         alt="${description}"
+//         data-source="${original}"
+//         >
+//         </a>
+//         </li>`
+//     )
+//         .join("");
+//     pics.innerHTML = imgHTML;
+// };
+// newGallery();
+// pics.addEventListener("click", handleClick);
+
+
+console.log(galleryItems);
