@@ -28,3 +28,4 @@ const lightBox = new SimpleLightbox(".gallery a", {
     captionDelay: "250ms",
 });
 console.log(galleryItems);
+console.log(lightBox);

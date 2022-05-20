@@ -50,4 +50,5 @@ function onImageItemClick(e) {
     instance.show()
 };
 
+
 console.log(galleryItems);
