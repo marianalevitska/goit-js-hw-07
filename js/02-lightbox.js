@@ -24,6 +24,7 @@ function createGalleryItem(galleryItems) {
 }
 
 const lightBox = new SimpleLightbox(".gallery a", {
+    docClose: false,
     captionsData: "alt",
     captionDelay: "250ms",
 });
